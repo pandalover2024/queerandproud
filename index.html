@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Queer & Proud</title>
+  <link rel="icon" type="image/png" href="logo.png">
+  <meta name="description" content="Queer & Proud ist eine moderne, strukturierte und respektvolle Community für queere Menschen und Allies. Ohne unnötiges Drama, mit klaren Regeln, guter Atmosphäre und echtem Support." />
+  <style>
+    :root {
+      --bg: #f4f1ec;
+      --surface: #ffffff;
+      --surface-soft: #fbf8f4;
+      --text: #1f2530;
+      --muted: #5d6678;
+      --line: #e7e0d8;
+      --shadow: 0 18px 45px rgba(31, 37, 48, 0.10);
+      --radius-xl: 34px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --max: 1220px;
+      --red: #ff5d73;
+      --orange: #ff9a3d;
+      --yellow: #ffd93b;
+      --green: #18a35d;
+      --blue: #3c6cff;
+      --purple: #8b46ff;
+      --wa: #25D366;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, #efebe5 0%, #f7f4ef 100%);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    .container {
+      width: min(calc(100% - 30px), var(--max));
+      margin: 0 auto;
+    }
+
+    .site-shell {
+      background: var(--surface);
+      min-height: 100vh;
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.03);
+    }
+
+    .top-line {
+      height: 6px;
+      background: linear-gradient(90deg, var(--red), var(--orange), var(--yellow), var(--green), var(--blue), var(--purple));
+    }
+
+    .header {
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .header-inner {
+      min-height: 92px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      width: 182px;
+      height: 62px;
+      border: 3px solid var(--text);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+      background: #fff;
+      flex-shrink: 0;
+    }
+
+    .brand-word {
+      font-weight: 900;
+      font-size: 1.02rem;
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      text-transform: lowercase;
+    }
+
+    .brand-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 4px;
+      width: 56px;
+      height: 56px;
+    }
+
+    .brand-grid span {
+      display: block;
+      border-radius: 9px;
+    }
+
+    .brand-grid span:nth-child(1) { background: var(--red); }
+    .brand-grid span:nth-child(2) { background: var(--orange); }
+    .brand-grid span:nth-child(3) { background: var(--yellow); }
+    .brand-grid span:nth-child(4) { background: var(--green); }
+    .brand-grid span:nth-child(5) { background: var(--purple); }
+    .brand-grid span:nth-child(6) { background: var(--blue); }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav a {
+      font-weight: 800;
+      font-size: 1rem;
+      padding: 10px 14px;
+      border-radius: 14px;
+      transition: 0.18s ease;
+    }
+
+    .nav a:hover {
+      background: #f3eee8;
+    }
+
+    .nav a:nth-child(1) { color: var(--red); }
+    .nav a:nth-child(2) { color: var(--orange); }
+    .nav a:nth-child(3) { color: var(--green); }
+    .nav a:nth-child(4) { color: var(--blue); }
+    .nav a:nth-child(5) { color: var(--text); }
+    .nav .cta {
+      background: var(--wa);
+      color: #08130b;
+      box-shadow: 0 10px 22px rgba(37,211,102,0.20);
+    }
+
+    .hero {
+      padding: 0 0 26px;
+    }
+
+    .hero-stage {
+      position: relative;
+      min-height: 620px;
+      border-bottom: 1px solid var(--line);
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04)),
+        url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+    }
+
+    .hero-stage::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(245,241,236,0.92) 0%, rgba(245,241,236,0.80) 34%, rgba(245,241,236,0.18) 68%, rgba(245,241,236,0.12) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+      min-height: 620px;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-card {
+      max-width: 540px;
+      background: rgba(255,255,255,0.94);
+      padding: 34px 34px 36px;
+      clip-path: polygon(0 0, 100% 0, 100% 84%, 88% 84%, 100% 100%, 0 100%);
+      box-shadow: var(--shadow);
+    }
+
+    .eyebrow {
+      margin-bottom: 14px;
+      font-weight: 800;
+      font-size: 1.15rem;
+      letter-spacing: 0.01em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3, h4 {
+      margin: 0 0 12px;
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 7vw, 5.6rem);
+      max-width: 7ch;
+    }
+
+    h2 {
+      font-size: clamp(1.8rem, 3.4vw, 3rem);
+      text-transform: uppercase;
+    }
+
+    h3 {
+      font-size: 1.35rem;
+    }
+
+    p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .hero-text {
+      font-size: 1.04rem;
+      max-width: 46ch;
+      margin-top: 14px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+
+    .btn {
+      min-height: 54px;
+      padding: 0 20px;
+      border-radius: 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      border: 2px solid transparent;
+      transition: 0.18s ease;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      background: var(--wa);
+      color: #07120a;
+    }
+
+    .btn-secondary {
+      border-color: var(--text);
+      color: var(--text);
+      background: transparent;
+    }
+
+    .section {
+      padding: 42px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 26px;
+    }
+
+    .section-title p {
+      max-width: 860px;
+      margin: 10px auto 0;
+      font-size: 1.03rem;
+    }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .video-card {
+      background: #1f2530;
+      border-radius: 8px;
+      min-height: 280px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background:
+        linear-gradient(rgba(31,37,48,0.35), rgba(31,37,48,0.35)),
+        url('https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+    }
+
+    .play {
+      width: 86px;
+      height: 60px;
+      border-radius: 16px;
+      background: #ff3333;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: grid;
+      place-items: center;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+    }
+
+    .play::before {
+      content: "";
+      width: 0;
+      height: 0;
+      border-left: 18px solid white;
+      border-top: 12px solid transparent;
+      border-bottom: 12px solid transparent;
+      margin-left: 4px;
+    }
+
+    .text-card {
+      padding: 10px 6px;
+    }
+
+    .text-card p {
+      font-size: 1.03rem;
+      margin-bottom: 16px;
+    }
+
+    .wide-note {
+      margin-top: 18px;
+      text-align: center;
+      font-size: 1.05rem;
+    }
+
+    .icon-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 24px;
+    }
+
+    .icon-card {
+      text-align: center;
+      padding: 18px 14px 10px;
+    }
+
+    .icon-shape {
+      width: 112px;
+      height: 112px;
+      margin: 0 auto 18px;
+      border-radius: 28px;
+      display: grid;
+      place-items: center;
+      border: 3px solid currentColor;
+      font-size: 3rem;
+      font-weight: 900;
+      background: rgba(255,255,255,0.6);
+    }
+
+    .icon-card:nth-child(1) { color: var(--orange); }
+    .icon-card:nth-child(2) { color: var(--green); }
+    .icon-card:nth-child(3) { color: var(--blue); }
+
+    .icon-card h3 {
+      font-size: 1.9rem;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .icon-card p {
+      max-width: 33ch;
+      margin: 0 auto;
+    }
+
+    .category-layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 26px;
+      margin-top: 14px;
+    }
+
+    .side-nav {
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 18px;
+      position: sticky;
+      top: 112px;
+      height: fit-content;
+      box-shadow: var(--shadow);
+    }
+
+    .side-nav a {
+      display: block;
+      padding: 12px 14px;
+      border-radius: 14px;
+      font-weight: 700;
+      color: var(--muted);
+      margin-bottom: 8px;
+      transition: 0.18s ease;
+    }
+
+    .side-nav a:hover {
+      background: white;
+      color: var(--text);
+    }
+
+    .content-stack {
+      display: grid;
+      gap: 18px;
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .panel h3 {
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .panel-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .mini-panel {
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .mini-panel strong {
+      display: block;
+      font-size: 1.05rem;
+      margin-bottom: 6px;
+    }
+
+    .list {
+      list-style: none;
+      padding: 0;
+      margin: 14px 0 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .list li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .mark {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      background: white;
+      border: 2px solid var(--line);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      color: var(--text);
+      font-weight: 900;
+      font-size: 0.9rem;
+    }
+
+    .join-panel {
+      background: linear-gradient(135deg, #fff8ef 0%, #f4fffa 50%, #f4f8ff 100%);
+    }
+
+    .footer {
+      padding: 36px 0 48px;
+    }
+
+    .footer-box {
+      border-top: 1px solid var(--line);
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      color: var(--muted);
+    }
+
+    .small { font-size: 0.94rem; }
+
+    @media (max-width: 1024px) {
+      .intro-grid,
+      .icon-grid,
+      .category-layout,
+      .panel-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .side-nav {
+        position: static;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 16px 0;
+      }
+
+      .nav {
+        width: 100%;
+        justify-content: flex-start;
+        overflow-x: auto;
+      }
+
+      .nav a { white-space: nowrap; }
+
+      .brand-mark {
+        width: 160px;
+        height: 56px;
+      }
+
+      .hero-stage,
+      .hero-content {
+        min-height: 540px;
+      }
+
+      .hero-card {
+        max-width: 100%;
+        padding: 24px 24px 28px;
+        clip-path: none;
+        border-radius: 26px;
+      }
+
+      h1 { max-width: 100%; }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .section {
+        padding: 34px 0;
+      }
+
+      .icon-shape {
+        width: 96px;
+        height: 96px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="site-shell">
+    <div class="top-line"></div>
+
+    <header class="header">
+      <div class="container header-inner">
+        <a class="brand" href="#home" aria-label="Zur Startseite">
+          <div class="brand-mark">
+            <div class="brand-word">queer<br>proud</div>
+            <div class="brand-grid" aria-hidden="true">
+              <span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+        </a>
+
+        <nav class="nav" aria-label="Hauptnavigation">
+          <a href="#about">Über uns</a>
+          <a href="#welcome">Community</a>
+          <a href="#categories">Bereiche</a>
+          <a href="#rules">Regeln</a>
+          <a href="#join">Beitritt</a>
+          <a class="cta" href="https://chat.whatsapp.com/EYyWP2yAj5T8nnabUVstgO?mode=gi_t" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="home">
+      <section class="hero">
+        <div class="hero-stage">
+          <div class="hero-content">
+            <div class="hero-card">
+              <div class="eyebrow">Queer. Offen. Respektvoll.</div>
+              <h1>Reden. Chillen. Ankommen.</h1>
+              <p class="hero-text">
+                Eine WhatsApp Community für queere Menschen und Allies, die keinen Bock auf ständiges Drama haben.
+                Klar, freundlich, modern und mit echter Atmosphäre statt toxischem Chaos.
+              </p>
+              <div class="hero-actions">
+                <a class="btn btn-primary" href="https://chat.whatsapp.com/EYyWP2yAj5T8nnabUVstgO?mode=gi_t" target="_blank" rel="noopener noreferrer">Zur WhatsApp Gruppe</a>
+                <a class="btn btn-secondary" href="#about">Mehr erfahren</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="about">
+        <div class="container">
+          <div class="section-title">
+            <h2>Treffen. Schreiben. Wohlfühlen.</h2>
+          </div>
+
+          <div class="intro-grid">
+            <div class="video-card" aria-label="Vorschaubereich">
+              <div class="play" aria-hidden="true"></div>
+            </div>
+
+            <div class="text-card">
+              <p>
+                Queer & Proud ist eine Community für queere Menschen und Allies, die einen ruhigen und respektvollen Ort suchen.
+                Egal ob du neue Leute kennenlernen willst, einfach mitschreiben möchtest oder einen sicheren Raum brauchst,
+                in dem du dich nicht ständig erklären musst. Hier soll man sich leichter, freier und willkommener fühlen.
+              </p>
+              <p>
+                Die Gruppe ist entstanden, weil viele andere Gruppen nach kurzer Zeit in unnötigem Streit, Lästern,
+                Druck oder peinlicher Energie landen. Wir wollten bewusst eine bessere Atmosphäre schaffen.
+              </p>
+              <p>
+                Unser Fokus liegt auf Fairness, klarer Struktur, respektvoller Kommunikation und einer Community,
+                in der man gerne bleibt statt schnell wieder rauszugehen.
+              </p>
+            </div>
+          </div>
+
+          <p class="wide-note">
+            Hier findest du Gespräche, Support, neue Kontakte und einen Ort, der nicht von dauerndem Stress lebt.
+          </p>
+        </div>
+      </section>
+
+      <section class="section" id="welcome">
+        <div class="container">
+          <div class="section-title">
+            <h2>Du bist willkommen</h2>
+          </div>
+
+          <div class="icon-grid">
+            <article class="icon-card">
+              <div class="icon-shape">⌂</div>
+              <h3>Orte</h3>
+              <p>
+                Ein digitaler Ort, an dem du nicht performen musst. Einfach schreiben, lesen, ankommen und dich wohler fühlen.
+              </p>
+            </article>
+
+            <article class="icon-card">
+              <div class="icon-shape">☺</div>
+              <h3>Menschen</h3>
+              <p>
+                Menschen, die respektvoll miteinander umgehen und nicht jede Kleinigkeit zu einem riesigen Konflikt machen.
+              </p>
+            </article>
+
+            <article class="icon-card">
+              <div class="icon-shape">◔</div>
+              <h3>Möglichkeiten</h3>
+              <p>
+                Reden, zuhören, Kontakte knüpfen, Spaß haben, Unterstützung finden oder einfach still dabei sein.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="categories">
+        <div class="container">
+          <div class="section-title">
+            <h2>Mehrere Bereiche. Klar aufgebaut.</h2>
+            <p>
+              Die Seite ist bewusst in klare Kategorien gegliedert, damit neue Leute direkt verstehen, wie die Community funktioniert.
+            </p>
+          </div>
+
+          <div class="category-layout">
+            <aside class="side-nav">
+              <a href="#origin">Wie es entstand</a>
+              <a href="#difference">Was uns anders macht</a>
+              <a href="#members">Neue Mitglieder</a>
+              <a href="#rules">Regeln</a>
+              <a href="#join">Beitritt</a>
+            </aside>
+
+            <div class="content-stack">
+              <article class="panel" id="origin">
+                <h3>Wie die Gruppe entstanden ist</h3>
+                <p>
+                  Queer & Proud wurde gegründet, weil viele queere Menschen online zwar Anschluss suchen,
+                  aber oft stattdessen Drama, Cliquen oder unnötige Anspannung erleben. Aus genau diesem Problem
+                  ist die Idee entstanden, eine Community mit besserem Vibe und mehr Ordnung aufzubauen.
+                </p>
+              </article>
+
+              <article class="panel" id="difference">
+                <h3>Was uns anders macht</h3>
+                <div class="panel-grid">
+                  <div class="mini-panel">
+                    <strong>Weniger Drama</strong>
+                    <p>Die Gruppe soll nicht von Lästern, unnötiger Härte oder Dauerstress leben.</p>
+                  </div>
+                  <div class="mini-panel">
+                    <strong>Mehr Respekt</strong>
+                    <p>Jede Person soll sich ernst genommen fühlen, auch wenn Menschen unterschiedlich sind.</p>
+                  </div>
+                  <div class="mini-panel">
+                    <strong>Mehr Struktur</strong>
+                    <p>Klare Regeln und klare Bereiche sorgen für weniger Missverständnisse.</p>
+                  </div>
+                  <div class="mini-panel">
+                    <strong>Mehr Ruhe</strong>
+                    <p>Auch nachts wird Rücksicht genommen, damit nicht alle unnötig gestört werden.</p>
+                  </div>
+                </div>
+              </article>
+
+              <article class="panel" id="members">
+                <h3>Neue Mitglieder</h3>
+                <ul class="list">
+                  <li><span class="mark">✓</span><span>Neue Mitglieder stellen sich einmal kurz vor, wenn sie der Gruppe beitreten.</span></li>
+                  <li><span class="mark">✓</span><span>Danach ist alles freiwillig und niemand muss sich ständig neu erklären.</span></li>
+                  <li><span class="mark">✓</span><span>Jede Person entscheidet selbst, wie viel sie teilen möchte.</span></li>
+                </ul>
+              </article>
+
+              <article class="panel" id="rules">
+                <h3>Gruppenregeln</h3>
+                <ul class="list">
+                  <li><span class="mark">•</span><span>Respekt ist Pflicht. Keine Beleidigungen, kein Mobbing und keine diskriminierenden Aussagen.</span></li>
+                  <li><span class="mark">•</span><span>Diskussionen sind okay, aber ruhig und fair. Keine absichtliche Eskalation.</span></li>
+                  <li><span class="mark">•</span><span>Keine Screenshots oder Inhalte aus der Gruppe weitergeben ohne Erlaubnis.</span></li>
+                  <li><span class="mark">•</span><span>Zwischen 22:00 und 8:00 bitte nur wichtige Nachrichten, damit andere nicht unnötig gestört werden.</span></li>
+                  <li><span class="mark">•</span><span>Wer nur Stress sucht, passt nicht zu dem, was wir hier aufbauen wollen.</span></li>
+                </ul>
+              </article>
+
+              <article class="panel join-panel" id="join">
+                <h3>Jetzt beitreten</h3>
+                <p>
+                  Wenn du eine entspannte queere WhatsApp Community suchst, in der nicht jede Woche ein neues Chaos entsteht,
+                  dann bist du hier richtig.
+                </p>
+                <div class="hero-actions">
+                  <a class="btn btn-primary" href="https://chat.whatsapp.com/EYyWP2yAj5T8nnabUVstgO?mode=gi_t" target="_blank" rel="noopener noreferrer">Zur WhatsApp Gruppe</a>
+                  <a class="btn btn-secondary" href="#about">Über uns lesen</a>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-box">
+        <div>
+          <strong>Queer & Proud</strong>
+          <div class="small">Wir freuen uns auf euch schon!</div>
+        </div>
+       
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
